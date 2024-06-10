@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 import HomeScreen from '../../screens/HomeScreen';
-import MediaHomeScreen from '../../screens/media/MediaHomeScreen';
+import MediaHomeScreen from '../../screens/photo-album/MediaHomeScreen';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
     <BottomNavigationTab title="홈" />
-    <BottomNavigationTab title="미디어" />
+    <BottomNavigationTab title="사진첩" />
   </BottomNavigation>
 );
 
@@ -28,10 +28,10 @@ const TabNavigator = () => (
       }}
     />
     <Screen
-      name="Media"
+      name="PhotoAlbum"
       component={MediaHomeScreen}
       options={{
-        headerShown: false,
+        headerTitle: '사진첩',
       }}
     />
   </Navigator>

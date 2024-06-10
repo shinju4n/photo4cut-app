@@ -3,7 +3,7 @@ import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {NavigationContainer} from '@react-navigation/native';
-import RootNavigator from './src/navigation/root/RootNavigaitor';
+import RootNavigator from './src/navigation/root/RootNavigator';
 import {default as color} from './src/styles/colors.json';
 import {ThemeContext} from './src/context/theme-context';
 
