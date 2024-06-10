@@ -1,11 +1,14 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import * as eva from '@eva-design/eva';
+import {ApplicationProvider, Layout, Text} from '@ui-kitten/components';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView>
-      <Text>photo4cut</Text>
-    </SafeAreaView>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text category="h1">HOME</Text>
+      </Layout>
+    </ApplicationProvider>
   );
 }
 
