@@ -4,17 +4,27 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from './src/navigation/root/RootNavigaitor';
-import {default as theme} from './src/styles/theme.json';
+import {default as themeJson} from './src/styles/theme.json';
+import {ThemeContext} from './src/context/theme-context';
 
 function App(): React.JSX.Element {
+  const [theme, setCurrentTheme] = React.useState<'light' | 'dark' | 'mapping'>(
+    'light',
+  );
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setCurrentTheme(nextTheme);
+  };
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </ApplicationProvider>
+      <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <ApplicationProvider {...eva} theme={{...eva[theme], ...themeJson}}>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </ApplicationProvider>
+      </ThemeContext.Provider>
     </>
   );
 }
