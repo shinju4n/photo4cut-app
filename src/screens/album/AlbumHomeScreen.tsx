@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {type AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
 import {AlbumRoutes} from '@/constants/index';
 import PhotoAlbumList from '@/components/photo-album/AlbumList';
-import TopHeader from '@/components/photo-album/TopHeader';
+import TopHeader from '@/components/TopHeader';
 
 type PhotoAlbumHomeScreen = StackScreenProps<
   AlbumStackParamList,
@@ -17,7 +17,13 @@ const PhotoAlbumHomeScreen = ({navigation}: PhotoAlbumHomeScreen) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <TopHeader rightAction={goToPhotoAlbumAddMedia} />
+      <TopHeader
+        title="사진첩"
+        rightAction={{
+          iconName: 'camera-outline',
+          onPress: goToPhotoAlbumAddMedia,
+        }}
+      />
       <PhotoAlbumList data={undefined} />
     </SafeAreaView>
   );
