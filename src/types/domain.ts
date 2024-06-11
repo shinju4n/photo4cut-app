@@ -1,6 +1,6 @@
 type ThumbnailType = 'image' | 'video';
 
-interface Feed {
+interface Album {
   id: number;
   title: string;
   thumbnailUrl: string;
@@ -8,4 +8,4 @@ interface Feed {
   createdAt: string;
 }
 
-export type {Feed, ThumbnailType};
+export type {Album, ThumbnailType};
