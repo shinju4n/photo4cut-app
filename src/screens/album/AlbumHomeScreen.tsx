@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {type AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
 import {AlbumRoutes} from '@/constants/index';
-import PhotoAlbumList from '@/components/photo-album/AlbumList';
+import PhotoAlbumList from '@/components/album/AlbumList';
 import TopHeader from '@/components/TopHeader';
 
 type PhotoAlbumHomeScreen = StackScreenProps<
