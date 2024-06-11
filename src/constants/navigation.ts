@@ -1,9 +1,9 @@
 export const BottomTabRoutes = {
   HOME: 'Home',
-  PHOTO_ALBUM: 'PhotoAlbum',
+  ALBUM: 'Album',
 } as const;
 
-export const PhotoAlbumRoutes = {
+export const AlbumRoutes = {
   ADD_MEDIA: 'AddMedia',
-  PHOTO_ALBUM_HOME: 'PhotoAlbumHOME',
+  ALBUM_HOME: 'AlbumHOME',
 } as const;

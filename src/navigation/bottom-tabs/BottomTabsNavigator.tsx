@@ -4,10 +4,16 @@ import {
   type BottomTabBarProps,
 } from '@react-navigation/bottom-tabs';
 import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
-import HomeScreen from '../../screens/HomeScreen';
-import MediaHomeScreen from '../../screens/photo-album/MediaHomeScreen';
+import PhotoAlbumNavigator from '@/navigation/stack/AlbumNavigator';
+import HomeScreen from '@/screens/HomeScreen';
+import {BottomTabRoutes} from '@/constants/index';
 
-const {Navigator, Screen} = createBottomTabNavigator();
+type TabParamList = {
+  [BottomTabRoutes.HOME]: undefined;
+  [BottomTabRoutes.ALBUM]: undefined;
+};
+
+const {Navigator, Screen} = createBottomTabNavigator<TabParamList>();
 
 const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
   <BottomNavigation
@@ -21,17 +27,17 @@ const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
 const TabNavigator = () => (
   <Navigator tabBar={BottomTabBar}>
     <Screen
-      name="Home"
+      name={BottomTabRoutes.HOME}
       component={HomeScreen}
       options={{
         headerShown: false,
       }}
     />
     <Screen
-      name="PhotoAlbum"
-      component={MediaHomeScreen}
+      name={BottomTabRoutes.ALBUM}
+      component={PhotoAlbumNavigator}
       options={{
-        headerTitle: '사진첩',
+        headerShown: false,
       }}
     />
   </Navigator>

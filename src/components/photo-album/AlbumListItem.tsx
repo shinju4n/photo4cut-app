@@ -3,11 +3,11 @@ import {Album} from '@/types';
 import {Card, Layout, Text} from '@ui-kitten/components';
 import {Dimensions, Image, StyleSheet} from 'react-native';
 
-interface PhotoAlbumListItemProps {
+interface AlbumListItemProps {
   album: Album;
 }
 
-const PhotoAlbumListItem: FC<PhotoAlbumListItemProps> = ({album}) => {
+const AlbumListItem: FC<AlbumListItemProps> = ({album}) => {
   return (
     <Card style={styles.feedContainer}>
       <Text category="h5">{album.title}</Text>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PhotoAlbumListItem;
+export default AlbumListItem;
