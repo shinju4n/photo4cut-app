@@ -7,6 +7,7 @@ import {BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
 import PhotoAlbumNavigator from '@/navigation/stack/AlbumNavigator';
 import HomeScreen from '@/screens/HomeScreen';
 import {BottomTabRoutes} from '@/constants/index';
+import CustomIcon from '@/components/CustomIcon';
 
 type TabParamList = {
   [BottomTabRoutes.HOME]: undefined;
@@ -19,8 +20,11 @@ const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
-    <BottomNavigationTab title="홈" />
-    <BottomNavigationTab title="사진첩" />
+    <BottomNavigationTab title="홈" icon={<CustomIcon name="home-outline" />} />
+    <BottomNavigationTab
+      title="사진첩"
+      icon={<CustomIcon name="image-outline" />}
+    />
   </BottomNavigation>
 );
 
