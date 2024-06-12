@@ -4,6 +4,7 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {validateEmail} from '@/constants/validate';
 import {authAlerts} from '@/constants';
+import useAuth from '@/hooks/useAuth';
 
 type LoginFormType = {
   email: string;
@@ -11,12 +12,21 @@ type LoginFormType = {
 };
 
 const LoginScreen = () => {
+  const {loginMutation} = useAuth();
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm<LoginFormType>();
-  const onSubmit = handleSubmit(data => console.log(data));
+
+  const requestLogin = (data: LoginFormType) => {
+    loginMutation.mutate(data, {
+      onError: error => console.log('error: ', error),
+    });
+  };
+
+  const onSubmit = handleSubmit(data => requestLogin(data));
+
   return (
     <Layout style={styles.container}>
       <SafeAreaView>
