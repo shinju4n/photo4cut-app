@@ -2,6 +2,8 @@ import React from 'react';
 import {ImageProps, SafeAreaView, StyleSheet} from 'react-native';
 import {AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
 import {type StackScreenProps} from '@react-navigation/stack';
+import usePermission from '@/hooks/usePermission';
+import useGalleryPick from '@/hooks/useGalleryPick';
 import {Button, IconElement, Layout} from '@ui-kitten/components';
 import TopHeader from '@/components/TopHeader';
 import CustomIcon from '@/components/CustomIcon';
@@ -21,6 +23,9 @@ const renderIcon = ({name, ...props}: RenderIconProp): IconElement => {
 };
 
 const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
+  usePermission('PHOTO');
+  const useGetPhotoFromGallery = useGalleryPick();
+
   return (
     <SafeAreaView style={styles.container}>
       <TopHeader
@@ -35,7 +40,7 @@ const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
           style={styles.button}
           size="giant"
           accessoryLeft={props => renderIcon({name: 'folder', ...props})}
-          onPress={() => {}}>
+          onPress={() => useGetPhotoFromGallery.handleChange()}>
           사진에서 가져오기
         </Button>
         <Button
