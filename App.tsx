@@ -9,12 +9,13 @@ import {ThemeContext} from './src/context/theme-context';
 
 function App(): React.JSX.Element {
   const [theme, setCurrentTheme] = React.useState<'light' | 'dark' | 'mapping'>(
-    'light',
+    'dark',
   );
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setCurrentTheme(nextTheme);
   };
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
