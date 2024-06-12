@@ -8,7 +8,7 @@ function getFormDataMedia(media: ImageOrVideo) {
     name: media.path.split('/').pop(),
   };
 
-  formData.append('images', file);
+  formData.append('file', file);
   return formData;
 }
 
