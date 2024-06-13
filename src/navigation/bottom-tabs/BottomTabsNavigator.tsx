@@ -9,12 +9,12 @@ import HomeScreen from '@/screens/HomeScreen';
 import {BottomTabRoutes} from '@/constants/index';
 import CustomIcon from '@/components/CustomIcon';
 
-type TabParamList = {
+export type BottomTabParamList = {
   [BottomTabRoutes.HOME]: undefined;
   [BottomTabRoutes.ALBUM]: undefined;
 };
 
-const {Navigator, Screen} = createBottomTabNavigator<TabParamList>();
+const {Navigator, Screen} = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
   <BottomNavigation

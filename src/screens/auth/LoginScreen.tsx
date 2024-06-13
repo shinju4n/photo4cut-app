@@ -12,7 +12,7 @@ type LoginFormType = {
 };
 
 const LoginScreen = () => {
-  const {loginMutation} = useAuth();
+  const {loginMutation, getProfileQuery} = useAuth();
   const {
     control,
     handleSubmit,
@@ -20,9 +20,7 @@ const LoginScreen = () => {
   } = useForm<LoginFormType>();
 
   const requestLogin = (data: LoginFormType) => {
-    loginMutation.mutate(data, {
-      onError: error => console.log('error: ', error),
-    });
+    loginMutation.mutate(data);
   };
 
   const onSubmit = handleSubmit(data => requestLogin(data));
