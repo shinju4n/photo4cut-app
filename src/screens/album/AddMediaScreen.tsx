@@ -27,32 +27,36 @@ const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
   const useGetPhotoFromGallery = useGalleryPick();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TopHeader
-        title="네컷 추가"
-        leftAction={{
-          iconName: 'arrow-back',
-          onPress: () => navigation.goBack(),
-        }}
-      />
-      <Layout style={styles.buttonContainer}>
-        <Button
-          style={styles.button}
-          size="giant"
-          accessoryLeft={props => renderIcon({name: 'folder', ...props})}
-          onPress={() => useGetPhotoFromGallery.handleChange()}>
-          사진에서 가져오기
-        </Button>
-        <Button
-          style={styles.button}
-          size="giant"
-          appearance="outline"
-          accessoryLeft={props => renderIcon({name: 'grid-outline', ...props})}
-          onPress={() => {}}>
-          QR 코드로 가져오기
-        </Button>
-      </Layout>
-    </SafeAreaView>
+    <Layout style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <TopHeader
+          title="네컷 추가"
+          leftAction={{
+            iconName: 'arrow-back',
+            onPress: () => navigation.goBack(),
+          }}
+        />
+        <Layout style={styles.buttonContainer}>
+          <Button
+            style={styles.button}
+            size="giant"
+            accessoryLeft={props => renderIcon({name: 'folder', ...props})}
+            onPress={() => useGetPhotoFromGallery.handleChange()}>
+            사진에서 가져오기
+          </Button>
+          <Button
+            style={styles.button}
+            size="giant"
+            appearance="outline"
+            accessoryLeft={props =>
+              renderIcon({name: 'grid-outline', ...props})
+            }
+            onPress={() => {}}>
+            QR 코드로 가져오기
+          </Button>
+        </Layout>
+      </SafeAreaView>
+    </Layout>
   );
 };
 
@@ -60,6 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   buttonContainer: {
     flex: 1,
     justifyContent: 'center',

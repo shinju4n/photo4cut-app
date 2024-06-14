@@ -9,21 +9,23 @@ function HomeScreen({}: HomeScreenProps) {
   const {logoutMutation, getProfileQuery} = useAuth();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Layout style={styles.layout}>
-        <Text category="h1">안녕하세요</Text>
-        <Button
-          onPress={() =>
-            logoutMutation.mutate(null, {
-              onSuccess: () => {
-                getProfileQuery.refetch();
-              },
-            })
-          }>
-          로그아웃
-        </Button>
-      </Layout>
-    </SafeAreaView>
+    <Layout style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <Layout style={styles.layout}>
+          <Text category="h1">안녕하세요</Text>
+          <Button
+            onPress={() =>
+              logoutMutation.mutate(null, {
+                onSuccess: () => {
+                  getProfileQuery.refetch();
+                },
+              })
+            }>
+            로그아웃
+          </Button>
+        </Layout>
+      </SafeAreaView>
+    </Layout>
   );
 }
 
