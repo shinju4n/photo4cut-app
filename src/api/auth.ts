@@ -2,6 +2,26 @@ import {Auth, Profile} from '@/types';
 import axiosInstance from './axios';
 import {getEncryptedStorage} from '@/utils/encryptedStorage';
 
+type RequestSignUp = {
+  nickname: string;
+  email: string;
+  password: string;
+};
+
+const requestSignUp = async ({
+  nickname,
+  email,
+  password,
+}: RequestSignUp): Promise<void> => {
+  const {data} = await axiosInstance.post('/auth/sign-up', {
+    nickname,
+    email,
+    password,
+  });
+
+  return data;
+};
+
 type ResponseToken = {
   accessToken: string;
   refreshToken: string;
@@ -42,5 +62,5 @@ const requestLogout = async () => {
   await axiosInstance.post('/auth/logout');
 };
 
-export {requestLogin, getProfile, getAccessToken, requestLogout};
-export type {ResponseToken, ResponseProfile};
+export {requestLogin, getProfile, getAccessToken, requestLogout, requestSignUp};
+export type {ResponseToken, ResponseProfile, RequestSignUp};

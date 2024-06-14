@@ -5,6 +5,7 @@ import {
   getProfile,
   requestLogin,
   requestLogout,
+  requestSignUp,
 } from '@/api/auth';
 import queryClient from '@/api/query-client';
 import {numbers} from '@/constants';
@@ -17,6 +18,15 @@ import {
 import {removeHeader, setHeader} from '@/utils/header';
 import {MutationFunction, useMutation, useQuery} from '@tanstack/react-query';
 import {useEffect} from 'react';
+
+function useSignUp(mutationOptions?: UseMutationCustomOptions) {
+  return useMutation({
+    mutationFn: requestSignUp,
+    // status code가 500 이상일 때만 에러로 처리
+    throwOnError: error => Number(error.status) >= 500,
+    ...mutationOptions,
+  });
+}
 
 function useLogin<T>(
   loginAPI: MutationFunction<ResponseToken, T>,
@@ -108,9 +118,11 @@ function useAuth() {
   const loginMutation = useEmailLogin();
   const logoutMutation = useLogout();
   const isLoginLoading = refreshTokenQuery.isPending;
+  const signUpMutation = useSignUp();
 
   return {
     loginMutation,
+    signUpMutation,
     isLogin,
     getProfileQuery,
     isLoginLoading,

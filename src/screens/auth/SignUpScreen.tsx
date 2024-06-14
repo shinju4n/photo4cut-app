@@ -3,6 +3,8 @@ import {Input, Layout, Text, Button} from '@ui-kitten/components';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {authAlerts, validateEmail} from '@/constants';
+import useAuth from '@/hooks/useAuth';
+import Toast from 'react-native-toast-message';
 
 type SignUpFormType = {
   nickname: string;
@@ -11,13 +13,38 @@ type SignUpFormType = {
   passwordConfirm: string;
 };
 
-const SignUpScreen = () => {
+const SignUpScreen = ({}) => {
+  const {loginMutation, signUpMutation} = useAuth();
   const {
     getValues,
     control,
     handleSubmit,
     formState: {errors},
   } = useForm<SignUpFormType>();
+
+  const onSubmit = (value: SignUpFormType) => {
+    const {email, password, nickname} = value;
+    const data = {email, password, nickname};
+    signUpMutation.mutate(data, {
+      onSuccess: () => {
+        Toast.show({
+          type: 'success',
+          text1: '회원가입에 성공하였습니다.',
+          position: 'bottom',
+          visibilityTime: 2000,
+        }),
+          loginMutation.mutate({email, password});
+      },
+      onError: e =>
+        Toast.show({
+          type: 'error',
+          text1: e.response?.data.message,
+          position: 'bottom',
+          visibilityTime: 2000,
+        }),
+    });
+  };
+
   return (
     <Layout style={styles.container}>
       <SafeAreaView>
@@ -35,10 +62,6 @@ const SignUpScreen = () => {
               minLength: {
                 value: 2,
                 message: authAlerts.MIN_LENGTH,
-              },
-              pattern: {
-                value: validateEmail,
-                message: authAlerts.INVALID_EMAIL,
               },
             }}
             render={({field: {onChange, onBlur, value}}) => (
@@ -130,7 +153,7 @@ const SignUpScreen = () => {
           />
         </Layout>
         <Button
-          onPress={handleSubmit(data => console.log(data))}
+          onPress={handleSubmit(data => onSubmit(data))}
           style={styles.submitButton}>
           회원 가입하기
         </Button>
