@@ -5,6 +5,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {validateEmail} from '@/constants/validate';
 import {authAlerts} from '@/constants';
 import useAuth from '@/hooks/useAuth';
+import Toast from 'react-native-toast-message';
 
 type LoginFormType = {
   email: string;
@@ -20,7 +21,18 @@ const LoginScreen = () => {
   } = useForm<LoginFormType>();
 
   const requestLogin = (data: LoginFormType) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        getProfileQuery.refetch();
+      },
+      onError: error =>
+        Toast.show({
+          type: 'error',
+          text1: error.response?.data.message || '로그인에 실패했습니다.',
+          position: 'bottom',
+          visibilityTime: 2000,
+        }),
+    });
   };
 
   const onSubmit = handleSubmit(data => requestLogin(data));

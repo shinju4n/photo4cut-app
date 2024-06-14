@@ -7,6 +7,7 @@ import RootNavigator from './src/navigation/root/RootNavigator';
 import {default as color} from './src/styles/colors.json';
 import {ThemeContext} from './src/context/theme-context';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ function App(): React.JSX.Element {
           <ApplicationProvider {...eva} theme={{...eva[theme], ...color}}>
             <NavigationContainer>
               <RootNavigator />
+              <Toast />
             </NavigationContainer>
           </ApplicationProvider>
         </ThemeContext.Provider>

@@ -9,10 +9,8 @@ import {
 import queryClient from '@/api/query-client';
 import {numbers} from '@/constants';
 import {queryKeys, storageKeys} from '@/constants/keys';
-import useAuthStore from '@/store/auth-store';
 import {UseMutationCustomOptions, UseQueryCustomOptions} from '@/types/common';
 import {
-  getEncryptedStorage,
   removeEncryptedStorage,
   setEncryptedStorage,
 } from '@/utils/encryptedStorage';
@@ -28,11 +26,7 @@ function useLogin<T>(
     mutationFn: loginAPI,
     onSuccess: ({accessToken, refreshToken}) => {
       setEncryptedStorage(storageKeys.REFRESH_TOKEN, refreshToken);
-      console.log(getEncryptedStorage(storageKeys.REFRESH_TOKEN));
       setHeader('Authorization', `Bearer ${accessToken}`);
-      queryClient.refetchQueries({
-        queryKey: [queryKeys.AUTH, queryKeys.GET_PROFILE],
-      });
     },
     onSettled: () => {
       queryClient.refetchQueries({
@@ -106,18 +100,14 @@ function useLogout(mutationOptions?: UseMutationCustomOptions) {
 }
 
 function useAuth() {
-  const {isLogin, setIsLogin} = useAuthStore();
-  const loginMutation = useEmailLogin({
-    onSuccess: () => setIsLogin(true),
-  });
   const refreshTokenQuery = useGetRefreshToken();
   const getProfileQuery = useGetProfile({
     enabled: refreshTokenQuery.isSuccess,
   });
+  const isLogin = getProfileQuery.isSuccess;
+  const loginMutation = useEmailLogin();
+  const logoutMutation = useLogout();
   const isLoginLoading = refreshTokenQuery.isPending;
-  const logoutMutation = useLogout({
-    onSuccess: () => setIsLogin(false),
-  });
 
   return {
     loginMutation,
