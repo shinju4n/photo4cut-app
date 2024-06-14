@@ -6,6 +6,7 @@ export const BottomTabRoutes = {
 export const AlbumRoutes = {
   ADD_MEDIA: 'AddMedia',
   ALBUM_HOME: 'AlbumHOME',
+  ALBUM_DETAIL: 'AlbumDetail',
 } as const;
 
 export const AuthRoutes = {

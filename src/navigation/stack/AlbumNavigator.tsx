@@ -3,10 +3,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import AddMediaScreen from '@/screens/album/AddMediaScreen';
 import AlbumScreen from '@/screens/album/AlbumHomeScreen';
 import {AlbumRoutes} from '@/constants/index';
+import AlbumDetailScreen from '@/screens/album/AlbumDetailScreen';
 
 export type AlbumStackParamList = {
   [AlbumRoutes.ALBUM_HOME]: undefined;
   [AlbumRoutes.ADD_MEDIA]: undefined;
+  [AlbumRoutes.ALBUM_DETAIL]: {id: number};
 };
 
 const Stack = createStackNavigator<AlbumStackParamList>();
@@ -20,6 +22,10 @@ const AlbumStackNavigator = () => {
       }}>
       <Stack.Screen name={AlbumRoutes.ALBUM_HOME} component={AlbumScreen} />
       <Stack.Screen name={AlbumRoutes.ADD_MEDIA} component={AddMediaScreen} />
+      <Stack.Screen
+        name={AlbumRoutes.ALBUM_DETAIL}
+        component={AlbumDetailScreen}
+      />
     </Stack.Navigator>
   );
 };
