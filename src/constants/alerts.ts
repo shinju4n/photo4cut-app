@@ -12,8 +12,11 @@ const alerts = {
 const authAlerts = {
   REQUIRED_EMAIL: '이메일을 입력해주세요',
   REQUIRED_PASSWORD: '비밀번호를 입력해주세요',
+  REQUIRED_NICKNAME: '닉네임을 입력해주세요',
   INVALID_EMAIL: '이메일 형식이 아닙니다',
   INVALID_PASSWORD: '비밀번호는 6자 이상이어야 합니다',
+  INVALID_NICKNAME: '닉네임은 2자 이상이어야 합니다',
+  MIN_LENGTH: '최소 2자 이상이어야 합니다',
 };
 
 export {alerts, authAlerts};

@@ -3,16 +3,23 @@ import {Button, Input, Layout, Text} from '@ui-kitten/components';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {validateEmail} from '@/constants/validate';
-import {authAlerts} from '@/constants';
+import {AuthRoutes, authAlerts} from '@/constants';
 import useAuth from '@/hooks/useAuth';
 import Toast from 'react-native-toast-message';
+import {StackScreenProps} from '@react-navigation/stack';
+import {AuthStackParamList} from '@/navigation/stack/AuthStackNavigator';
+
+type LoginScreenProps = StackScreenProps<
+  AuthStackParamList,
+  typeof AuthRoutes.LOGIN
+>;
 
 type LoginFormType = {
   email: string;
   password: string;
 };
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}: LoginScreenProps) => {
   const {loginMutation, getProfileQuery} = useAuth();
   const {
     control,
@@ -92,7 +99,9 @@ const LoginScreen = () => {
         </Layout>
         <Layout style={styles.buttonContainer}>
           <Button onPress={onSubmit}>로그인</Button>
-          <Button appearance="outline" onPress={() => console.log('hi')}>
+          <Button
+            appearance="outline"
+            onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}>
             회원가입
           </Button>
         </Layout>
