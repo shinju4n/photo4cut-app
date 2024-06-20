@@ -8273,6 +8273,7 @@ __metadata:
     react-native-toast-message: ^2.2.0
     react-test-renderer: 18.2.0
     reactotron-react-native: ^5.1.7
+    reactotron-react-query: ^1.0.4
     typescript: 5.0.4
     zustand: ^4.5.2
   languageName: unknown
@@ -8808,6 +8809,16 @@ __metadata:
     react-native-flipper:
       optional: true
   checksum: 6cdfcf45592dbfd8ca3f51fa59da666dc7b5b91c34bdd6dbd703ae75d5cd86df275250cc9a784c02077e1d05952041f76940384d926372a1cf3d49f6134a59cd
+  languageName: node
+  linkType: hard
+
+"reactotron-react-query@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "reactotron-react-query@npm:1.0.4"
+  peerDependencies:
+    react-query: ^3.39.2
+    reactotron-core-client: ^2.9.3
+  checksum: fa441799f6755bef156eeece588d722fbe7b4faece8baeee29e850ae929fdb6c897ced37ec05e5e6e9b21edf31a85aeb3b76922e005cf41b5cda1640b909a4cf
   languageName: node
   linkType: hard
 
