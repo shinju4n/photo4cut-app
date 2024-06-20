@@ -20,6 +20,10 @@ function App(): React.JSX.Element {
     setCurrentTheme(nextTheme);
   };
 
+  if (__DEV__) {
+    require('./ReactotronConfig');
+  }
+
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
