@@ -1,6 +1,6 @@
 import {Auth, Profile} from '@/types';
 import axiosInstance from './axios';
-import {getEncryptedStorage} from '@/utils/encryptedStorage';
+import {getEncryptedStorage} from '@/utils/encrypted-storage';
 
 type RequestSignUp = {
   nickname: string;

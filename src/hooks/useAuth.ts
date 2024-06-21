@@ -14,7 +14,7 @@ import {UseMutationCustomOptions, UseQueryCustomOptions} from '@/types/common';
 import {
   removeEncryptedStorage,
   setEncryptedStorage,
-} from '@/utils/encryptedStorage';
+} from '@/utils/encrypted-storage';
 import {removeHeader, setHeader} from '@/utils/header';
 import {MutationFunction, useMutation, useQuery} from '@tanstack/react-query';
 import {useEffect} from 'react';

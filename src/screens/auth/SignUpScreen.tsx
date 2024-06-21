@@ -32,8 +32,8 @@ const SignUpScreen = ({}) => {
           text1: '회원가입에 성공하였습니다.',
           position: 'bottom',
           visibilityTime: 2000,
-        }),
-          loginMutation.mutate({email, password});
+        });
+        loginMutation.mutate({email, password});
       },
       onError: e =>
         Toast.show({
