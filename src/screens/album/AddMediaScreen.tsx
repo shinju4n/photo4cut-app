@@ -1,30 +1,31 @@
 import React from 'react';
-import {ImageProps, SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
 import {type StackScreenProps} from '@react-navigation/stack';
+
 import usePermission from '@/hooks/usePermission';
-import useGalleryPick from '@/hooks/useGalleryPick';
-import {Button, IconElement, Layout} from '@ui-kitten/components';
+import {Layout} from '@ui-kitten/components';
 import TopHeader from '@/components/TopHeader';
-import CustomIcon from '@/components/CustomIcon';
+import MediaForm from '@/components/album/add-media/MediaForm';
 import {AlbumRoutes} from '@/constants';
+import {type Media} from '@/types';
 
 type AddMediaScreenProps = StackScreenProps<
   AlbumStackParamList,
   typeof AlbumRoutes.ADD_MEDIA
 >;
 
-interface RenderIconProp extends Partial<ImageProps> {
-  name: string;
-}
-
-const renderIcon = ({name, ...props}: RenderIconProp): IconElement => {
-  return <CustomIcon name={name} {...props} />;
+type MediaFormType = {
+  title: string;
+  media: Media;
 };
 
 const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
   usePermission('PHOTO');
-  const useGetPhotoFromGallery = useGalleryPick();
+
+  const onSubmit = (data: MediaFormType) => {
+    console.log(data);
+  };
 
   return (
     <Layout style={styles.container}>
@@ -36,25 +37,7 @@ const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
             onPress: () => navigation.goBack(),
           }}
         />
-        <Layout style={styles.buttonContainer}>
-          <Button
-            style={styles.button}
-            size="giant"
-            accessoryLeft={props => renderIcon({name: 'folder', ...props})}
-            onPress={() => useGetPhotoFromGallery.handleChange()}>
-            사진에서 가져오기
-          </Button>
-          <Button
-            style={styles.button}
-            size="giant"
-            appearance="outline"
-            accessoryLeft={props =>
-              renderIcon({name: 'grid-outline', ...props})
-            }
-            onPress={() => {}}>
-            QR 코드로 가져오기
-          </Button>
-        </Layout>
+        <MediaForm onSubmit={onSubmit} />
       </SafeAreaView>
     </Layout>
   );
@@ -63,16 +46,6 @@ const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  buttonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 16,
-  },
-  button: {
-    width: '80%',
   },
 });
 

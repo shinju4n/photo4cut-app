@@ -7,7 +7,6 @@ interface ImageInputProps extends PressableProps {
 }
 
 const ImageInput = ({onPress, mediaUri, ...props}: ImageInputProps) => {
-  console.log(mediaUri);
   return (
     <Pressable onPress={onPress} {...props}>
       <Image
