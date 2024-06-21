@@ -1,4 +1,4 @@
-const alerts = {
+export const alerts = {
   PHOTO_PERMISSION: {
     TITLE: '사진 권한 허용이 필요합니다.',
     DESCRIPTION: '설정 화면에서 사진 권한을 허용해주세요.',
@@ -9,7 +9,7 @@ const alerts = {
   },
 } as const;
 
-const authAlerts = {
+export const authAlerts = {
   REQUIRED_EMAIL: '이메일을 입력해주세요',
   REQUIRED_PASSWORD: '비밀번호를 입력해주세요',
   REQUIRED_NICKNAME: '닉네임을 입력해주세요',
@@ -19,4 +19,9 @@ const authAlerts = {
   MIN_LENGTH: '최소 2자 이상이어야 합니다',
 };
 
-export {alerts, authAlerts};
+export const mediaFormAlerts = {
+  REQUIRED_TITLE: '제목을 입력해주세요',
+  REQUIRED_DESCRIPTION: '설명을 입력해주세요',
+  REQUIRED_IMAGE: '이미지를 선택해주세요',
+  INVALID_TITLE: '제목은 2자 이상이어야 합니다',
+};
