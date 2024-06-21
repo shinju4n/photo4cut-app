@@ -17,4 +17,9 @@ interface Profile {
   loginType: 'email' | 'kakao';
 }
 
-export type {Album, ThumbnailType, Profile};
+interface Media {
+  mediaUri: string;
+  mediaType: ThumbnailType;
+}
+
+export type {Album, ThumbnailType, Profile, Media};
