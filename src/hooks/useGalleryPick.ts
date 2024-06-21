@@ -1,10 +1,11 @@
 import React from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import useUploadMedia from './useUploadMedia';
+import {Media} from '@/types';
 
 const useGalleryPick = () => {
   const uploadMedia = useUploadMedia();
-  const [mediaUri, setMediaUri] = React.useState<string | undefined>(undefined);
+  const [media, setMedia] = React.useState<Media | undefined>(undefined);
 
   const handleChange = async () => {
     const media = await ImagePicker.openPicker({
@@ -18,9 +19,9 @@ const useGalleryPick = () => {
       cropperCancelText: '취소',
     });
     const s3Uri = await uploadMedia.uploadToS3(media);
-    setMediaUri(s3Uri);
+    setMedia(s3Uri);
   };
 
-  return {handleChange, mediaUri};
+  return {handleChange, media};
 };
 export default useGalleryPick;

@@ -2,11 +2,12 @@ import React from 'react';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {uploadMediaToS3} from '@/api/image';
 import {getFormDataMedia} from '@/utils';
+import {Media} from '@/types';
 
 const useUploadMedia = () => {
   const [isUploading, setIsUploading] = React.useState<boolean>(false);
 
-  const uploadToS3 = async (media: ImageOrVideo) => {
+  const uploadToS3 = async (media: ImageOrVideo): Promise<Media> => {
     const formData = getFormDataMedia(media);
     try {
       setIsUploading(true);
@@ -14,6 +15,7 @@ const useUploadMedia = () => {
       return res;
     } catch (err) {
       console.log(err);
+      throw err;
     } finally {
       setIsUploading(false);
     }
