@@ -3,9 +3,15 @@ import ImagePicker from 'react-native-image-crop-picker';
 import useUploadMedia from './useUploadMedia';
 import {Media} from '@/types';
 
-const useGalleryPick = () => {
+interface useGalleryPickProps {
+  defaultValue?: Media;
+}
+
+const useGalleryPick = ({
+  defaultValue = undefined,
+}: useGalleryPickProps = {}) => {
   const uploadMedia = useUploadMedia();
-  const [media, setMedia] = React.useState<Media | undefined>(undefined);
+  const [media, setMedia] = React.useState<Media | undefined>(defaultValue);
 
   const handleChange = async () => {
     const media = await ImagePicker.openPicker({
