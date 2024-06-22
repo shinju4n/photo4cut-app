@@ -4,6 +4,7 @@ const queryKeys = {
   GET_PROFILE: 'getProfile',
   ALBUM: 'album',
   GET_ALBUMS: 'getAlbums',
+  GET_ALBUM: 'getAlbum',
 } as const;
 
 const storageKeys = {

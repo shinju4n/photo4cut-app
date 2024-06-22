@@ -9,7 +9,9 @@ import {Layout} from '@ui-kitten/components';
 import TopHeader from '@/components/TopHeader';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
-import {AlbumRoutes} from '@/constants';
+import {AlbumRoutes, queryKeys} from '@/constants';
+import {useQuery} from '@tanstack/react-query';
+import {getAlbumById} from '@/api/album';
 
 type AlbumDetailScreenProps = StackScreenProps<
   AlbumStackParamList,
@@ -17,11 +19,16 @@ type AlbumDetailScreenProps = StackScreenProps<
 >;
 
 const AlbumDetailScreen = ({route, navigation}: AlbumDetailScreenProps) => {
+  const {data: album} = useQuery({
+    queryFn: () => getAlbumById(route.params.id),
+    queryKey: [queryKeys.ALBUM, queryKeys.GET_ALBUM],
+  });
+
   return (
     <Layout style={styles.container}>
       <SafeAreaView style={styles.container}>
         <TopHeader
-          title={route.params.id.toString()}
+          title={album?.title || route.params.id.toString()}
           leftAction={{
             iconName: 'arrow-back',
             onPress: () => navigation.goBack(),
@@ -30,7 +37,7 @@ const AlbumDetailScreen = ({route, navigation}: AlbumDetailScreenProps) => {
         <Layout style={styles.imageContainer}>
           <ImageBackground
             source={{
-              uri: 'https://blog.kakaocdn.net/dn/3qwhk/btstayuNa5S/0sDvdFxpQW9VhzUIz7v6X1/img.jpg',
+              uri: album?.media.mediaUri,
             }}
             style={styles.imageBackground}
           />
