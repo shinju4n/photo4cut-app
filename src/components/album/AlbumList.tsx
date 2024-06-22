@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Dimensions} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
-import {type Album, type ThumbnailType} from '@/types';
+import {type Album} from '@/types';
 import AlbumListItem from './AlbumListItem';
 
 interface AlbumListProps {
@@ -9,15 +9,7 @@ interface AlbumListProps {
   data?: Album[];
 }
 
-const example = Array.from<Album>({length: 5}).map((_, i) => ({
-  id: i,
-  title: `제목 ${i}`,
-  thumbnailUrl: '',
-  thumbnailType: 'image' as ThumbnailType,
-  createdAt: '2024-06-06',
-}));
-
-const AlbumList: FC<AlbumListProps> = ({data = example}) => {
+const AlbumList: FC<AlbumListProps> = ({data}) => {
   return (
     <FlashList
       data={data}

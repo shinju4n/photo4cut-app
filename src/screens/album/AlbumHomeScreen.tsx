@@ -2,10 +2,12 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {type AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
-import {AlbumRoutes} from '@/constants/index';
+import {AlbumRoutes, queryKeys} from '@/constants/index';
 import PhotoAlbumList from '@/components/album/AlbumList';
 import TopHeader from '@/components/TopHeader';
 import {Layout} from '@ui-kitten/components';
+import {useQuery} from '@tanstack/react-query';
+import {getAlbums} from '@/api/album';
 
 type PhotoAlbumHomeScreen = StackScreenProps<
   AlbumStackParamList,
@@ -13,9 +15,15 @@ type PhotoAlbumHomeScreen = StackScreenProps<
 >;
 
 const PhotoAlbumHomeScreen = ({navigation}: PhotoAlbumHomeScreen) => {
+  const {data} = useQuery({
+    queryFn: () => getAlbums(),
+    queryKey: [queryKeys.ALBUM, queryKeys.GET_ALBUMS],
+  });
+
   const goToPhotoAlbumAddMedia = () => {
     navigation.navigate(AlbumRoutes.ADD_MEDIA);
   };
+
   return (
     <Layout style={styles.container}>
       <SafeAreaView style={styles.container}>
@@ -26,7 +34,7 @@ const PhotoAlbumHomeScreen = ({navigation}: PhotoAlbumHomeScreen) => {
             onPress: goToPhotoAlbumAddMedia,
           }}
         />
-        <PhotoAlbumList data={undefined} />
+        <PhotoAlbumList data={data} />
       </SafeAreaView>
     </Layout>
   );

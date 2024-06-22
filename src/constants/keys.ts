@@ -2,6 +2,8 @@ const queryKeys = {
   AUTH: 'auth',
   GET_ACCESS_TOKEN: 'getAccessToken',
   GET_PROFILE: 'getProfile',
+  ALBUM: 'album',
+  GET_ALBUMS: 'getAlbums',
 } as const;
 
 const storageKeys = {

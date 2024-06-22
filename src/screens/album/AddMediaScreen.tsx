@@ -7,8 +7,11 @@ import usePermission from '@/hooks/usePermission';
 import {Layout} from '@ui-kitten/components';
 import TopHeader from '@/components/TopHeader';
 import MediaForm from '@/components/album/add-media/MediaForm';
-import {AlbumRoutes} from '@/constants';
+import {AlbumRoutes, queryKeys} from '@/constants';
 import {type Media} from '@/types';
+import {useMutation, useQuery} from '@tanstack/react-query';
+import {createAlbum} from '@/api/album';
+import queryClient from '@/api/query-client';
 
 type AddMediaScreenProps = StackScreenProps<
   AlbumStackParamList,
@@ -22,9 +25,18 @@ type MediaFormType = {
 
 const AddMediaScreen = ({navigation}: AddMediaScreenProps) => {
   usePermission('PHOTO');
+  const mutation = useMutation({
+    mutationFn: createAlbum,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.ALBUM, queryKeys.GET_ALBUMS],
+      });
+      navigation.goBack();
+    },
+  });
 
   const onSubmit = (data: MediaFormType) => {
-    console.log(data);
+    mutation.mutate(data);
   };
 
   return (
