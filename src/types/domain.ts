@@ -1,14 +1,13 @@
 type ThumbnailType = 'image' | 'video';
 
-interface Album {
+export interface Album {
   id: number;
   title: string;
-  thumbnailUrl: string;
-  thumbnailType: ThumbnailType;
+  media: Media;
   createdAt: string;
 }
 
-interface Profile {
+export interface Profile {
   id: number;
   email: string;
   nickname: string | null;
@@ -17,9 +16,7 @@ interface Profile {
   loginType: 'email' | 'kakao';
 }
 
-interface Media {
+export interface Media {
   mediaUri: string;
   mediaType: ThumbnailType;
 }
-
-export type {Album, ThumbnailType, Profile, Media};
