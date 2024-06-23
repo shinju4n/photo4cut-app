@@ -11,7 +11,7 @@ import queryClient from '@/api/query-client';
 
 function App(): React.JSX.Element {
   const [theme, setCurrentTheme] = React.useState<'light' | 'dark' | 'mapping'>(
-    'dark',
+    'light',
   );
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';

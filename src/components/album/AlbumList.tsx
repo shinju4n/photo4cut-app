@@ -23,7 +23,7 @@ const AlbumList: FC<AlbumListProps> = ({data = []}) => {
       data={data}
       renderItem={({item}) => <AlbumListItem album={item} />}
       estimatedItemSize={Dimensions.get('screen').height / 2.5}
-      numColumns={1}
+      numColumns={2}
     />
   );
 };
