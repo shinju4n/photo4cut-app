@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageBackground: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height / 1.8,
+    width: '100%',
+    height: Dimensions.get('screen').height / 1.5,
+    resizeMode: 'contain',
   },
 });
 

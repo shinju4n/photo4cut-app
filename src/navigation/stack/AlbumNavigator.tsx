@@ -25,6 +25,10 @@ const AlbumStackNavigator = () => {
       <Stack.Screen
         name={AlbumRoutes.ALBUM_DETAIL}
         component={AlbumDetailScreen}
+        options={{
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+        }}
       />
     </Stack.Navigator>
   );
