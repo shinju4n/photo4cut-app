@@ -6,7 +6,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {Layout} from '@ui-kitten/components';
-import TopHeader from '@/components/TopHeader';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AlbumStackParamList} from '@/navigation/stack/AlbumNavigator';
 import {AlbumRoutes, queryKeys} from '@/constants';
@@ -18,7 +17,7 @@ type AlbumDetailScreenProps = StackScreenProps<
   typeof AlbumRoutes.ALBUM_DETAIL
 >;
 
-const AlbumDetailScreen = ({route, navigation}: AlbumDetailScreenProps) => {
+const AlbumDetailScreen = ({route}: AlbumDetailScreenProps) => {
   const {data: album} = useQuery({
     queryFn: () => getAlbumById(route.params.id),
     queryKey: [queryKeys.ALBUM, queryKeys.GET_ALBUM],
@@ -27,13 +26,6 @@ const AlbumDetailScreen = ({route, navigation}: AlbumDetailScreenProps) => {
   return (
     <Layout style={styles.container}>
       <SafeAreaView style={styles.container}>
-        <TopHeader
-          title={album?.title || route.params.id.toString()}
-          leftAction={{
-            iconName: 'arrow-back',
-            onPress: () => navigation.goBack(),
-          }}
-        />
         <Layout style={styles.imageContainer}>
           <ImageBackground
             source={{
@@ -58,7 +50,7 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: '100%',
-    height: Dimensions.get('screen').height / 1.5,
+    height: Dimensions.get('screen').height / 1,
     resizeMode: 'contain',
   },
 });

@@ -16,14 +16,16 @@ const AlbumListItem: FC<AlbumListItemProps> = ({album}) => {
       NavigationProp<AlbumStackParamList, typeof AlbumRoutes.ALBUM_HOME>
     >();
   const {id, media} = album;
+
   return (
     <Card
       style={styles.feedContainer}
-      onPress={() =>
+      onPress={() => {
+        navigation.setOptions({tabBarStyle: {display: 'none'}});
         navigation.navigate(AlbumRoutes.ALBUM_DETAIL, {
           id: id,
-        })
-      }>
+        });
+      }}>
       <Layout style={styles.thumbnailContainer}>
         <Image src={media.mediaUri} style={styles.thumbnail} />
       </Layout>

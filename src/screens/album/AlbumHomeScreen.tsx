@@ -34,7 +34,7 @@ const PhotoAlbumHomeScreen = ({navigation}: PhotoAlbumHomeScreen) => {
             onPress: goToPhotoAlbumAddMedia,
           }}
         />
-        <PhotoAlbumList data={data} />
+        <PhotoAlbumList data={data ?? []} />
       </SafeAreaView>
     </Layout>
   );

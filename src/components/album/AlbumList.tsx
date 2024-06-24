@@ -6,7 +6,7 @@ import AlbumListItem from './AlbumListItem';
 import {Layout, Text} from '@ui-kitten/components';
 
 interface AlbumListProps {
-  data: Album[];
+  data?: Album[];
 }
 
 const AlbumList: FC<AlbumListProps> = ({data = []}) => {

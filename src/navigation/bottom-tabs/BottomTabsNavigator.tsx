@@ -8,6 +8,7 @@ import PhotoAlbumNavigator from '@/navigation/stack/AlbumNavigator';
 import HomeScreen from '@/screens/HomeScreen';
 import {BottomTabRoutes} from '@/constants/index';
 import CustomIcon from '@/components/CustomIcon';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 export type BottomTabParamList = {
   [BottomTabRoutes.HOME]: undefined;
@@ -16,39 +17,36 @@ export type BottomTabParamList = {
 
 const {Navigator, Screen} = createBottomTabNavigator<BottomTabParamList>();
 
-const BottomTabBar = ({navigation, state}: BottomTabBarProps) => (
-  <BottomNavigation
-    selectedIndex={state.index}
-    onSelect={index => navigation.navigate(state.routeNames[index])}>
-    <BottomNavigationTab title="홈" icon={<CustomIcon name="home-outline" />} />
-    <BottomNavigationTab
-      title="사진첩"
-      icon={<CustomIcon name="image-outline" />}
-    />
-  </BottomNavigation>
-);
+const BottomTabBar = ({navigation, state, ...props}: BottomTabBarProps) => {
+  return (
+    <BottomNavigation
+      selectedIndex={state.index}
+      onSelect={index => navigation.navigate(state.routeNames[index])}
+      {...props}>
+      <BottomNavigationTab
+        title="홈"
+        icon={<CustomIcon name="home-outline" />}
+      />
+      <BottomNavigationTab
+        title="사진첩"
+        icon={<CustomIcon name="image-outline" />}
+      />
+    </BottomNavigation>
+  );
+};
 
-const TabNavigator = () => (
-  <Navigator tabBar={BottomTabBar}>
-    <Screen
-      name={BottomTabRoutes.HOME}
-      component={HomeScreen}
-      options={{
+const BottomTabsNavigator = ({}) => {
+  return (
+    <Navigator
+      // tabBar={BottomTabBar}
+      initialRouteName={BottomTabRoutes.HOME}
+      screenOptions={{
         headerShown: false,
-      }}
-    />
-    <Screen
-      name={BottomTabRoutes.ALBUM}
-      component={PhotoAlbumNavigator}
-      options={{
-        headerShown: false,
-      }}
-    />
-  </Navigator>
-);
-
-const BottomTabsNavigator = (): React.ReactElement => {
-  return <TabNavigator />;
+      }}>
+      <Screen name={BottomTabRoutes.HOME} component={HomeScreen} />
+      <Screen name={BottomTabRoutes.ALBUM} component={PhotoAlbumNavigator} />
+    </Navigator>
+  );
 };
 
 export default BottomTabsNavigator;
