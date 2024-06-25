@@ -8,11 +8,12 @@ import PhotoAlbumNavigator from '@/navigation/stack/AlbumNavigator';
 import HomeScreen from '@/screens/HomeScreen';
 import {BottomTabRoutes} from '@/constants/index';
 import CustomIcon from '@/components/CustomIcon';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import SettingScreen from '@/screens/setting/SettingScreen';
 
 export type BottomTabParamList = {
   [BottomTabRoutes.HOME]: undefined;
   [BottomTabRoutes.ALBUM]: undefined;
+  [BottomTabRoutes.SETTING]: undefined;
 };
 
 const {Navigator, Screen} = createBottomTabNavigator<BottomTabParamList>();
@@ -45,6 +46,7 @@ const BottomTabsNavigator = ({}) => {
       }}>
       <Screen name={BottomTabRoutes.HOME} component={HomeScreen} />
       <Screen name={BottomTabRoutes.ALBUM} component={PhotoAlbumNavigator} />
+      <Screen name={BottomTabRoutes.SETTING} component={SettingScreen} />
     </Navigator>
   );
 };

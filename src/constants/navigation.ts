@@ -1,6 +1,7 @@
 export const BottomTabRoutes = {
   HOME: 'Home',
   ALBUM: 'Album',
+  SETTING: 'Setting',
 } as const;
 
 export const AlbumRoutes = {
